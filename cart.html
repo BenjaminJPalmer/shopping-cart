@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>Lidldi - The not so super market</title>
 
         <script src="js/cart.js" type="text/javascript"></script>
+        <script src="js/data/discounts.js" type="text/javascript"></script>
     </head>
 
     <body>
         <h1>Cart</h1>
         <p>Your cart contents are below</p>
 
+        <form id="discount-code-form">
+            <fieldset>
+                <label for="discount-code">Discount Code</label>
+                <input
+                    id="discount-code"
+                    name="discount-code"
+                    type="text"
+                    placeholder="Enter your discount code"
+                />
+                <button type="submit">Redeem</button>
+
+                <div id="discount-code-message"></div>
+            </fieldset>
+        </form>
+
         <table id="shopping-cart">
             <thead>
-            <tr>
-                <th>Product</th>
-                <th>SKU</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
+                <tr>
+                    <th>Product</th>
+                    <th>SKU</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
             </thead>
-            <tbody id="shopping-cart-contents">
-
-            </tbody>
+            <tbody id="shopping-cart-contents"></tbody>
+            <tfoot id="shopping-cart-footer"></tfoot>
         </table>
 
         <script src="js/global.js" type="text/javascript"></script>

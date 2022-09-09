@@ -41,3 +41,44 @@ function addProductToCart(event) {
 
     saveCart();
 }
+
+function addDiscountToCart(event) {
+    // don't let the form submit normally
+    event.preventDefault();
+
+    let submittedCode = event.target.elements['discount-code'].value;
+
+    let discount = getDiscountByCode(submittedCode);
+
+    let discountMessage = document.getElementById('discount-code-message');
+
+    if (!discount) {
+        discountMessage.innerHTML = 'The discount code was not recognised';
+        return;
+    }
+
+    discountMessage.innerHTML = `The discount code ${submittedCode} has been applied`;
+
+    // if there's a discount already in the cart then we remove it
+    for (let i = 0; i < window.cart.length; i++) {
+        if (window.cart[i].code && window.cart[i].code === discount.code) {
+            // remove discount from cart
+            window.cart.splice(i, 1);
+            break;
+        }
+    }
+
+    // map the discount to a similar structure to products in the cart
+    let cartDiscount = {
+        code: discount.code,
+        name: `DISCOUNT`,
+        type: 'discount',
+        sku: discount.code,
+        quantity: 1,
+        price: discount.amount
+    }
+
+    window.cart.push(cartDiscount);
+
+    saveCart();
+}
